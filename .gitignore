@@ -43,6 +43,8 @@
 *.pdb
 
 #
+config.h
+dwm
 *.rej
 *.orig
 
