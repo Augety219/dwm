@@ -24,6 +24,7 @@ static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeHid]  = { col_cyan,  col_gray1, col_cyan  },
 };
 
 /* tagging */
@@ -84,13 +85,16 @@ static const Key keys[] = {
 	// 关闭状态栏
 	{ MODKEY,                       XK_b,          togglebar,      {0} },
 	// 移动光标
-	// { MODKEY,                       XK_j,          focusstackvis,  {.i = +1 } },
-	// { MODKEY,                       XK_k,          focusstackvis,  {.i = -1 } },
+	{ MODKEY,                       XK_j,          focusstackvis,  {.i = +1 } },
+	{ MODKEY,                       XK_k,          focusstackvis,  {.i = -1 } },
 	// 纵向分屏
 	{ MODKEY,                       XK_i,          incnmaster,     {.i = +1 } },
 	// 横向分屏
 	{ MODKEY,                       XK_d,          incnmaster,     {.i = -1 } },
-
+	// 隐藏/展示窗口
+	{ MODKEY,                       XK_s,          show,           {0} },
+	{ MODKEY|ShiftMask,             XK_s,          showall,        {0} },
+	{ MODKEY,                       XK_h,          hide,           {0} },
 
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
@@ -116,6 +120,7 @@ static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	{ ClkWinTitle,          0,              Button1,        togglewin,      {0} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
